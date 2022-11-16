@@ -1,38 +1,35 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 import api from "./api";
-import {Product} from "./types";
+import { Product } from "./types";
+
+import { Card, Checkout, Footer, Header, Layout, List } from "./components";
+
+
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
+
+  const quantity = 3
+  const totalPrice = 12
 
   useEffect(() => {
     api.list().then(setProducts);
   }, []);
 
+
+
   return (
-    <main>
-      <header>Estampitiency</header>
-      <section>
-        {products.map((product) => (
-          <article key={product.id}>
-            <img src={product.image} />
-            <div>
-              <p>{product.title}</p>
-              <p>{product.description}</p>
-            </div>
-            <button>Agregar</button>
-          </article>
+    <Layout>
+      <Header>Estampitiency</Header>
+      <List>
+        {products.map((product: Product) => (
+          <Card key={product.id} product={product} />
         ))}
-      </section>
-      <aside>
-        <button>3 productos (total: $12)</button>
-      </aside>
-      <footer>
-        Encontrá la consigna de este ejercicio y otros más{" "}
-        <a href="https://github.com/goncy/interview-challenges/tree/main/simple-cart">acá</a>
-      </footer>
-    </main>
+      </List>
+      <Checkout {...{ quantity, totalPrice }} />
+      <Footer />
+    </Layout>
   );
 }
 
