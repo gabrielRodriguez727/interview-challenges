@@ -23,3 +23,12 @@
 .card>div>button {
     margin-top: auto;
 }
+
+.card div.buttons {
+    justify-content: center;
+    flex-direction: row;
+}
+
+.card div.buttons * {
+    margin: auto 0;
+}

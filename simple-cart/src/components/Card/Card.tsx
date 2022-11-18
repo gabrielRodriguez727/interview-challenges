@@ -1,11 +1,16 @@
 import styles from "./Card.module.css"
-import { Product } from "../../types";
+import { Product, CartOp } from "../../types";
 
 interface CardProps {
-    product: Product
+    cartQuantity: number,
+    product: Product,
+    handleClickCardProduct: Function,
 }
 
-function Card({ product }: CardProps) {
+function Card({ cartQuantity, product, handleClickCardProduct }: CardProps) {
+
+
+
 
     return (
         <article className={styles.card}>
@@ -14,7 +19,14 @@ function Card({ product }: CardProps) {
                 <p>{product.title}</p>
                 <p>{product.description}</p>
             </div>
-            <button>Agregar</button>
+            {cartQuantity ?
+                <div className={styles.buttons}>
+                    <button onClick={() => { handleClickCardProduct({ product, cartOp: CartOp.REMOVE }) }}>-</button>
+                    <span>{cartQuantity}</span>
+                    <button onClick={() => { handleClickCardProduct({ product, cartOp: CartOp.ADD }) }}>+</button>
+                </div> :
+                <button onClick={() => { handleClickCardProduct({ product, cartOp: CartOp.ADD }) }}>Agregar</button>
+            }
         </article>
     )
 }
