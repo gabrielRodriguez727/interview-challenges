@@ -1,4 +1,4 @@
-import styles from "./Layout.module.css"
+import styles from './Layout.module.css'
 
 interface LayoutProps {
     children: JSX.Element[]

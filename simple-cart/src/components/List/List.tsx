@@ -1,13 +1,23 @@
-import styles from "./List.module.css"
+import styles from './List.module.css'
+import { useContext } from 'react';
+import { StoreContext } from '../../context/StoreContext';
+import { Product } from '../../types';
+import { Card } from '../../components';
 
-interface ListProps {
-    children: JSX.Element[]
-}
 
-function List({ children }: ListProps) {
+function List() {
+    const { products } = useContext(StoreContext)
     return (
         <section className={styles.list_container}>
-            {children}
+            {
+                products.map((product: Product) => {
+                    return (
+                        <Card
+                            key={product.id}
+                            product={product}
+                        />)
+                })
+            }
         </section>
     )
 }

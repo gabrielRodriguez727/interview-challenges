@@ -1,11 +1,10 @@
-import styles from "./Checkout.module.css"
+import { useContext } from 'react';
+import { StoreContext } from '../../context/StoreContext';
 
-interface CheckoutProps {
-    quantity: number,
-    totalPrice: number
-}
+import styles from './Checkout.module.css'
 
-function Checkout({ quantity, totalPrice }: CheckoutProps) {
+function Checkout() {
+    const { quantity, totalPrice } = useContext(StoreContext)
     return (
         <aside className={styles.checkout}>
             <button>{quantity} productos (total: ${totalPrice})</button>

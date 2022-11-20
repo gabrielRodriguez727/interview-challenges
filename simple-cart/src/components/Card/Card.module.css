@@ -24,11 +24,12 @@
     margin-top: auto;
 }
 
-.card div.buttons {
+.card div.buttons_wrapper {
     justify-content: center;
     flex-direction: row;
+    height: auto;
 }
 
-.card div.buttons * {
+.card div.buttons_wrapper * {
     margin: auto 0;
 }

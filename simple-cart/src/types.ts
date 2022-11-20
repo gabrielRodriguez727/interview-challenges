@@ -6,9 +6,9 @@ export interface Product {
   price: number;
 }
 
-export interface ProductItem {
+export interface CartItem {
   product: Product;
-  quantity: number
+  quantity: number;
 }
 
 export enum CartOp {
