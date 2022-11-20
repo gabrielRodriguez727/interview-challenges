@@ -1,10 +1,8 @@
 import { createContext, useState } from 'react';
-import { useProducts } from '../hooks/useProducts';
 import { Product, CartItem, CartOp } from '../types'
 
 
 interface StoreContextInterface {
-    products: Product[];
     quantity: number;
     totalPrice: number;
     handleClickCardProduct: Function;
@@ -13,7 +11,6 @@ interface StoreContextInterface {
 }
 
 export const StoreContext = createContext<StoreContextInterface>({
-    products: [],
     quantity: 0,
     totalPrice: 0,
     cart: [],
@@ -21,11 +18,8 @@ export const StoreContext = createContext<StoreContextInterface>({
 });
 
 export function StoreProvider({ children }: { children: JSX.Element | JSX.Element[] }) {
-    const [products] = useProducts()
+
     const [cart, setCart] = useState<CartItem[]>([])
-
-
-
     const [quantity, totalPrice] = cart.reduce(function (accu, val) {
         accu[0] += val.quantity
         accu[1] += val.quantity * val.product.price
@@ -60,10 +54,10 @@ export function StoreProvider({ children }: { children: JSX.Element | JSX.Elemen
 
 
     return (
-        <StoreContext.Provider value={{ cart, products, quantity, totalPrice, handleClickCardProduct }}>
-            {/* <TasksDispatchContext.Provider value={dispatch}> */}
+        <StoreContext.Provider value={{ cart,  quantity, totalPrice, handleClickCardProduct }}>
+
             {children}
-            {/* </TasksDispatchContext.Provider> */}
+
         </StoreContext.Provider>
     );
 }
